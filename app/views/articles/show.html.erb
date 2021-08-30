@@ -1,0 +1,67 @@
+<h1><%= @article.title %></h1>
+
+<p><%= @article.body %></p>
+
+  <ul><%= link_to "Edit ARTICLE", edit_article_path(@article) %></ul>
+  <ul><%= link_to "Destroy", article_path(@article),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></ul>
+  	<br><br>
+
+	<%= link_to "SHOW ALL ARTICLES", articles_path %>
+</ul>
+
+
+
+<h2>Comments</h2>
+<%= render @article.comments %>
+
+<h2>Add a comment:</h2>
+<%= render 'comments/form'%>
+<br>
+<--------------------------------------------------------------->
+<br>
+
+
+<%= form_with model: @article do |form| %>
+  <%= form.text_field :title %>
+  <%= form.text_area :body, size: "60x10" %>
+  <%= form.submit %>
+<--------------------------------------------------------->
+  <%= form.select :city, [["Berlin", "BE"], ["Chicago", "CHI"], ["Madrid", "MD"]] %>
+
+  <--------------------------------------------------------->
+
+
+    <%= form.select :city, [["Berlin", "BE"], ["Chicago", "CHI"], ["Madrid", "MD"]], selected: "CHI" %>
+
+    <--------------------------------------------------------->
+      <%= form.select :city,
+      {
+        "Europe" => [ ["Berlin", "BE"], ["Madrid", "MD"] ],
+        "North America" => [ ["Chicago", "CHI"] ],
+      },
+      selected: "CHI" %>
+
+      <------------------------------------------->
+
+        <%= form.date_select :birth_date %>
+     <------------------------------------------->
+
+         <------------------------------------------->
+
+        <%#= form.collection_select :city_id, City.order(:name), :id, :name %>
+            <%= form.file_field :picture %>
+<% end %>
+
+
+  
+
+<br>
+<---------------------------------------------------->
+
+<br>
+
+<%= form_with url: 'http://farfar.away/form', authenticity_token: 'external_token' do %>
+  Form contents
+<% end %>
